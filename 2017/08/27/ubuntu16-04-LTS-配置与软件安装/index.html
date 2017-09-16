@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="驴的世界">
 <meta property="og:description" content="机器设置 拨号上网设置  打开终端">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-29T10:58:47.615Z">
+<meta property="og:updated_time" content="2017-09-16T15:19:13.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu16.04 LTS 配置与软件安装">
 <meta name="twitter:description" content="机器设置 拨号上网设置  打开终端">
@@ -386,8 +386,13 @@
 <li><p>查看日志</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plog</div></pre></td></tr></table></figure>
 </li>
+<li><p>补充</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">注意： dls 连接不上的时候可以尝试 poff 确认关闭后在重新连接或者配置，不然会出现问题。</div><div class="line"></div><div class="line">关于 ubuntu 中网络管理有两套，如果选择其中一套就可以不要管另一个。</div><div class="line"></div><div class="line">如下，选择 managed=true 表示由nv来管理网络：</div><div class="line">wuqilv@wuqilv-CP65S:~$ cat /etc/NetworkManager/NetworkManager.conf </div><div class="line">[main]</div><div class="line">plugins=ifupdown,keyfile,ofono</div><div class="line">dns=dnsmasq</div><div class="line"></div><div class="line">[ifupdown]</div><div class="line">managed=true</div><div class="line">wuqilv@wuqilv-CP65S:~$ </div><div class="line"></div><div class="line">由于一些原因， 需要使用dls的时候，需使用命令 pppoeconf 进行配置，此时 interface 文件如下：</div><div class="line"></div><div class="line">wuqilv@wuqilv-CP65S:~$ cat /etc/network/interfaces</div><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">iface dsl-provider inet ppp</div><div class="line">pre-up /bin/ip link set wlp4s0 up # line maintained by pppoeconf</div><div class="line">provider dsl-provider</div><div class="line"></div><div class="line">auto wlp4s0</div><div class="line">iface wlp4s0 inet manual</div></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
+</ol>
+<ol>
 <li><p>英文环境安装中文拼音</p>
 <ul>
 <li>安装语言包<br>System Settings–&gt;Language Support–&gt;Install/Remove Languages 选中chinese，点击Apply应用即可，等待下载安装完成。</li>
