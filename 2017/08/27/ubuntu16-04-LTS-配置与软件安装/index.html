@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="驴的世界">
 <meta property="og:description" content="机器设置 拨号上网设置  打开终端">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-16T15:19:13.850Z">
+<meta property="og:updated_time" content="2017-09-24T11:48:47.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu16.04 LTS 配置与软件安装">
 <meta name="twitter:description" content="机器设置 拨号上网设置  打开终端">
@@ -481,7 +481,18 @@
 </li>
 </ul>
 </li>
+<li><p>添加和删除登录密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$seahorse</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>软件源更新</p>
+</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak <span class="comment">#备份</span></div><div class="line">sudo vim /etc/apt/sources.list <span class="comment">#修改源列表，将阿里云源复制到sources.list文件中</span></div><div class="line">sudo apt-get update <span class="comment">#更新本地源列表；</span></div></pre></td></tr></table></figure>
+<p>阿里云源:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</div></pre></td></tr></table></figure></p>
+<ol>
+<li>安装软件时提示未能满足依赖关系</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$sudo</span> apt-get update <span class="comment">#更新软件源；</span></div><div class="line"><span class="variable">$sudo</span> apt-get install xxxxx <span class="comment">#安装软件，可能出现有未能满足的依赖关系；</span></div><div class="line"><span class="variable">$sudo</span> apt-get -f install <span class="comment">#针对当前不满足的依赖关系，下载正确版本的依赖库；</span></div><div class="line"><span class="variable">$sudo</span> apt-get install xxxxx <span class="comment">#再次安装软件</span></div></pre></td></tr></table></figure>
 <h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><ol>
 <li><p>安装chrome</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo wget https://repo.fdzh.org/chrome/google-chrome.list -P /etc/apt/sources.list.d/</div><div class="line">$ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install google-chrome-stable</div><div class="line">$ /usr/bin/google-chrome-stable</div></pre></td></tr></table></figure>
@@ -489,14 +500,36 @@
 <li><p>Hexo</p>
 <ul>
 <li><p>安装 hexo</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nodejs-legacy</div><div class="line">$ npm install -g hexo-cli</div><div class="line">$ <span class="built_in">cd</span> ~/</div><div class="line">$ hexo init my-blog</div><div class="line">$ <span class="built_in">cd</span> my-blog</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nodejs-legacy</div><div class="line">$ npm install -g hexo-cli</div><div class="line">$ <span class="built_in">cd</span> ~/</div><div class="line">$ hexo init my-blog</div><div class="line">$ <span class="built_in">cd</span> my-blog</div><div class="line">$ npm install</div><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 </li>
 <li><p>安装 hexo-admin</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install --save hexo-admin</div><div class="line">$ hexo server -d</div></pre></td></tr></table></figure>
 </li>
 <li><p>阅读更多 添加 “\&lt;!– more –>“ </p>
 </li>
-<li></li>
+<li>github https 发布<br>repo: <a href="https://github.com/username/username.github.io.git" target="_blank" rel="external">https://github.com/username/username.github.io.git</a></li>
+<li>github　ssh　发布<br>repo：git@github.com:username/username.github.io.git</li>
+<li>生成ssh密钥<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">    <span class="variable">$ssh</span>-keygen -t rsa -C <span class="string">"邮箱名"</span></div><div class="line">    Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/dell/.ssh/id_rsa):</div><div class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/dell/.ssh/id_rsa.</div><div class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/dell/.ssh/id_rsa.pub.</div><div class="line">The key fingerprint is:</div><div class="line">65:69:······02:4b emailname@email.com</div><div class="line">The key<span class="string">'s randomart image is:</span></div><div class="line"><span class="string">+--[ RSA 2048]----+</span></div><div class="line"><span class="string">|                 |</span></div><div class="line"><span class="string">|       .   o .   |</span></div><div class="line"><span class="string">|    . o o = o    |</span></div><div class="line"><span class="string">|   . o * = o     |</span></div><div class="line"><span class="string">|  E  o + o .     |</span></div><div class="line"><span class="string">| . o.   . .      |</span></div><div class="line"><span class="string">|     ..          |</span></div><div class="line"><span class="string">+-----------------+</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>gitbub 添加密钥<blockquote>
+<p>打开　id_rsa.pub 复制</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>登录github Settings ——&gt; SSH and GPG keys ——&gt; New SSH key，点击新建SSH key</p>
+<p>粘贴之前复制的内容</p>
+<p>测试　 ssh -T git@github.com</p>
+</blockquote>
+<ul>
+<li><p>设置用户信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"用户名"</span></div><div class="line">$ git config --global user.email  <span class="string">"你希望的邮箱名"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>同步博客</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ol>
@@ -505,6 +538,8 @@
 <li>shadowsocks <a href="http://www.cnblogs.com/bevis-blog/p/5751536.html" target="_blank" rel="external">http://www.cnblogs.com/bevis-blog/p/5751536.html</a></li>
 <li>Hexo <a href="https://hexo.io/zh-cn/" target="_blank" rel="external">https://hexo.io/zh-cn/</a></li>
 <li>Hexo-admin <a href="https://github.com/jaredly/hexo-admin" target="_blank" rel="external">https://github.com/jaredly/hexo-admin</a></li>
+<li>Ubuntu安装软件时提示有未能满足的依赖关系<a href="http://blog.csdn.net/diligent_321/article/details/52748333" target="_blank" rel="external">http://blog.csdn.net/diligent_321/article/details/52748333</a></li>
+<li>github权限导致hexo 发布失败　<a href="http://www.cnblogs.com/xsilence/p/6001938.html" target="_blank" rel="external">http://www.cnblogs.com/xsilence/p/6001938.html</a></li>
 </ul>
 
       
